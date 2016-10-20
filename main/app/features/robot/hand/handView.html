@@ -1,0 +1,29 @@
+
+<div class="container-fluid" g-controller="HandCtrl">
+    <h1>HAND CONTROL</h1>
+    <div class="row">
+        <div class="col-xs-2 jumbotron">
+            <robot-hand editable="true" scale="1" hand-model="newStep.hand"></robot-hand>
+        </div>
+        <div class="col-xs-5 jumbotron">
+            <button ng-click="testconsole()">test console</button>
+            <button ng-click="applicationservice.save(application)">save to local storage</button>
+            <button ng-click="sendToHand()">send to hand</button>
+            <p>{{newStep}}</p>
+            <button ng-click="createStep()">create step</button>
+
+        </div>
+
+        <div class="col-xs-6 jumbotron">
+            // affichage de la playlist
+            <button ng-click="submitplaylist()">SUBMIT PLAYLIST</button>
+            <ul>
+                <li ng-repeat ="step in playlist">
+                    <p>{{step}}</p>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+</div>
