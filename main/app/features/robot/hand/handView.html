@@ -15,8 +15,13 @@
         </div>
 
         <div class="col-xs-6 jumbotron">
-            // affichage de la playlist
             <button ng-click="submitplaylist()">SUBMIT PLAYLIST</button>
+            <button ng-click="clearPlaylist()">CLEAR PLAYLIST</button>
+            // affichage de la playlist
+            <div style="float:left" ng-repeat="step in application.playlist">
+                <robot-hand editable="true" scale="0.4" hand-model="step.hand"></robot-hand>
+            </div>
+
             <ul>
                 <li ng-repeat ="step in playlist">
                     <p>{{step}}</p>

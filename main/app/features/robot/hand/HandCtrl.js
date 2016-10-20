@@ -15,7 +15,7 @@ angular.module('robot.manager')
         console.log($scope.newStep);
         $scope.playlist = [];
 
-        RobotPlayerService.playhand($scope.newStep.hand);
+        //RobotPlayerService.playhand($scope.newStep.hand);
 
         $scope.createStep = function(){
             // build hhtt request
@@ -24,21 +24,34 @@ angular.module('robot.manager')
             $scope.newStep = new Step($scope.newStep);
         };
 
-        $scope.submitplaylist = function(){
+        $scope.submitplaylist = function(index){
+            var i = index? index : 0;
             console.log('SUBMIT PLAYLIST');
-            angular.forEach($scope.playlist,function(hand){
-                $timeout(function () {
-                    console.log('send hand');
-                    console.log(hand);
-                    RobotPlayerService.playhand(hand);
-                }, 5000);
-            });
+            RobotPlayerService.playhand($scope.playlist[i].hand)
+                .then(function () {
+                    if (i < $scope.playlist.length) {
+                        i++;
+                        $timeout(function () {
+                            $scope.submitplaylist(i);
+                            console.log("attente apres retour")
+                        },1000)
+                    }
+                }, function errorCallback(){
+                        console.log('error');
+                });
         };
 
         $scope.sendToHand = function(){
             // build hhtt request
             //var httprequest = 'http://' +$scope.application.API.URL + '/ +fingers?=' +$scope.newhand.major;
             RobotPlayerService.playhand($scope.newStep.hand);
+        };
+
+        $scope.clearPlaylist = function(){
+            $scope.playlist = [];
+            $scope.newStep = new Step();
+            $scope.application.playlist = $scope.playlist;
+
         };
     }
 

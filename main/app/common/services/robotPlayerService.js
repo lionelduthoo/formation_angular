@@ -13,27 +13,19 @@ console.log('robot service');
         function _playHand(hand){
 
             var baseUrl = ApplicationService.load().API.URL + '/fingers?';
-            console.log(baseUrl);
-            $http(
+            console.log('ROBOT SERVICE');
+            console.log(hand);
+            return $http(
                 {
                     method: 'GET',
                     url: baseUrl,
                     params: hand
-                })
-                .then(function successCallback(response)
-                {
-                    console.log('RobotPlayerService _play successCallback : ');
-                    console.log( response);
-                }, function errorCallback(response)
-                {
-                    console.log('RobotPlayerService _play errorCallback : ' );
-                    console.log( response);
-                }
-            );
+                });
+
         }
 
         return {
-            playhand : _playHand, // si on met playhand() on aura le resultat alors que l'on veut que cela retourne la fonction
+            playhand : _playHand // si on met playhand() on aura le resultat alors que l'on veut que cela retourne la fonction
 
         }
     }]);
